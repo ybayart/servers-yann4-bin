@@ -1,0 +1,3 @@
+#! /bin/bash
+
+xrandr --output DVI-I-0 --primary --pos 0x-60 --output HDMI-0 --auto --pos -1920x0 --output DP-0 --auto --pos -3840x0

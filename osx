@@ -1,0 +1,20 @@
+#! /bin/bash
+
+kvm_path=/mnt/DD1/kvm/osx/OSX-KVM
+sudo virsh nodedev-detach pci_0000_08_00_0
+sudo virsh nodedev-detach pci_0000_08_00_1
+bash $kvm_path/br-setup.sh
+#sudo screen -dmS qemu-oxs $kvm_path/OpenCore-Boot.sh
+sudo virsh start osx
+if ! $(nc -zv 127.0.0.1 24800 > /dev/null 2>&1)
+then
+        nohup barrier /home/hexa/barrier.conf > /dev/null 2>&1 &
+fi
+one
+
+#echo "OSx VM started, waiting for VNC..."
+#while ! $(nc -zv 127.0.0.1 5901 > /dev/null 2>&1)
+#do
+#       sleep 1
+#done
+#nohup remmina .local/share/remmina/group_vnc_local-vnc_127-0-0-1-5901.remmina > /dev/null 2>&1 &

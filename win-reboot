@@ -1,0 +1,6 @@
+#! /bin/bash
+
+id=$(cat /boot/grub/grub.cfg|grep -E "^(menuentry|submenu)"|cut -d "'" -f2|nl -v0|grep -i "windows"|awk -F ' ' '{print $1}')
+echo $id
+sudo grub-reboot $id
+sudo reboot
